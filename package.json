@@ -1,0 +1,31 @@
+{
+  "name": "mhdev",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue": "^2.0.1",
+    "axios": "^0.24.0",
+    "element-plus": "^1.3.0-beta.5",
+    "qs": "^6.10.2",
+    "vite": "^2.7.12",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.12",
+    "vue3-cookies": "^1.0.6"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^8.3.0",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.15"
+  }
+}
