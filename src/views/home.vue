@@ -17,10 +17,10 @@
         :fit="fit"
       ></el-image>
       <div>
-        <el-link class="ml-6" :href="www + '/help'" target="_blank" :underline="false"><span class="dark:text-white text-xs">{{$t('help')}}</span></el-link>
-        <el-link class="ml-6" :href="www + '/doc'" target="_blank" :underline="false"><span class="dark:text-white text-xs">{{$t('doc')}}</span></el-link>
-        <el-link class="ml-6" href="/workorder" :underline="false"><span class="dark:text-white text-xs">{{$t('workorder')}}</span></el-link>
-        <el-dropdown @command="setLang" class="ml-6 px-0">
+        <el-link class="ml-5" :href="www + '/help'" target="_blank" :underline="false"><span class="dark:text-white text-xs">{{$t('help')}}</span></el-link>
+        <el-link class="ml-5" :href="www + '/doc'" target="_blank" :underline="false"><span class="dark:text-white text-xs">{{$t('doc')}}</span></el-link>
+        <el-link class="ml-5" href="/workorder" :underline="false"><span class="dark:text-white text-xs">{{$t('workorder')}}</span></el-link>
+        <el-dropdown @command="setLang" class="ml-5 px-0">
           <el-link :underline="false">
             <span class="dark:text-white text-xs">
               <template v-if="locale === 'zh'">中文</template>
@@ -29,27 +29,27 @@
           </el-link>
           <el-icon><caret-bottom class="dark:text-white text-xs" /></el-icon>
           <template #dropdown>
-            <el-dropdown-menu style="background-color: #171717;">
-              <el-dropdown-item command="zh" class=" hover:bg-neutral-600">简体中文</el-dropdown-item>
+            <el-dropdown-menu>
+              <el-dropdown-item command="zh">简体中文</el-dropdown-item>
               <el-dropdown-item command="en">Englist</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <el-dropdown @command="expense" class="ml-6">
+        <el-dropdown @command="expense" class="ml-5">
           <el-link :underline="false"><span class="dark:text-white text-xs">{{$t('expense')}}</span></el-link>
           <el-icon><caret-bottom class="dark:text-white text-xs" /></el-icon>
           <template #dropdown>
-            <el-dropdown-menu style="background-color: #171717;">
+            <el-dropdown-menu>
               <el-dropdown-item command="myorder">{{$t('myorder')}}</el-dropdown-item>
               <el-dropdown-item command="payments">{{$t('payments')}}</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <el-dropdown @command="dropdown" class="ml-6">
+        <el-dropdown @command="dropdown" class="ml-5">
           <el-avatar class="align-middle" :size="24" src="https://thirdwx.qlogo.cn/mmopen/mOW261WJzibtvH7qo1Zcg2icAySsT7ZtDJUIKuAC3ibuu6xFzR6eNmZCoAzWcswve7hib9tQziaAE73tjEScsUicicliaw/132"></el-avatar>
           <el-icon><caret-bottom class="dark:text-white text-xs" /></el-icon>
           <template #dropdown>
-            <el-dropdown-menu class="w-32" style="background-color: #171717;">
+            <el-dropdown-menu class="w-32">
               <div class="text-center p-2">码海无涯</div>
               <el-dropdown-item divided disabled>
                 <el-radio-group v-model="theme" size="small" @change="setTheme">
@@ -131,6 +131,7 @@ export default {
     const { proxy } = getCurrentInstance();
     const theme = ref(localStorage.getItem('theme') || 'dark');
     if (theme.value === 'dark') document.documentElement.classList.add('dark');
+    load();
     // 语言
     const { locale, t } = useI18n();
     document.title = t('sitetitle');
@@ -177,6 +178,13 @@ export default {
       }
     }
 
+    // 加载数据
+    function load() {
+      proxy.$http.get('/home').then((data) => {
+        // console.log(data);
+      });
+    }
+
     return {
       Setting,
       Right,
@@ -187,7 +195,7 @@ export default {
       theme,
       dropdown,
       expense,
-      isCollapse: true,
+      isCollapse: false,
       www: import.meta.env.VITE_WWW
     };
   }
